@@ -28,10 +28,15 @@ function writePassword() {
   
 }
 
-const lowercase = "abcdefghijklmnopqrstuvwxyz";
-const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const numeric = "0123456789";
-const special = "!@#$%^&*";
+// Array of special characters to be included in password
+var special = ['@','%','+','\\','/',"'",'!','#','$','^','?',':',',',')','(','}','{',']','[','~','-','_','.'];
+// Array of numeric characters to be included in password
+var numeric = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+// Array of lowercase characters to be included in password
+var lowercase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+// Array of uppercase characters to be included in password
+var uppercase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
 
 function generatePassword () {
   var lengthCriteria = prompt("How long would you like the password to be?");
@@ -53,45 +58,54 @@ function generatePassword () {
     return randomLowercase;
   }
   function getRandomUppercase () {
-    var randomUppercase = lowercase[Math.floor(Math.random() * uppercase.length)];
+    var randomUppercase = uppercase[Math.floor(Math.random() * uppercase.length)];
     return randomUppercase;  
   }
   function getRandomNumeric () {
-    var randomNumeric = lowercase[Math.floor(Math.random() * numeric.length)];
+    var randomNumeric = numeric[Math.floor(Math.random() * numeric.length)];
     return randomNumeric;  
   }
   function getRandomSpecial () {
-    var randomSpecial = lowercase[Math.floor(Math.random() * special.length)];
+    var randomSpecial = special[Math.floor(Math.random() * special.length)];
     return randomSpecial;  
   }
 
-  var randomFunctionArray = [];
-  var storedChar = "";
+  var possibleCharsArray = [];
+  var storedChar = [];
 
   //if lowercaseCriteria == true, then possibly insert lowercase letter
   if(lowercaseCriteria === true) {
-    randomFunctionArray.push(getRandomLowercase);
-    getRandomFunction();
+    possibleCharsArray.concat(lowercase);
+
   }
   //if uppercaseCriteria == true, then possibly insert uppercase letter
   if(uppercaseCriteria === true) {
-    randomFunctionArray.push(getRandomUppercase);
+    possibleCharsArray.concat(uppercase);
   }
   //if numericCriteria == true, then possibly insert uppercase letter
   if(numericCriteria === true) {
-    randomFunctionArray.push(getRandomNumeric);
+    possibleCharsArray.concat(numeric);
   }
   //if specialCriteria == true, then possibly insert uppercase letter
   if(specialCriteria === true) {
-    randomFunctionArray.push(getRandomSpecial);
+    possibleCharsArray.concat(special);
   }
+  
+  console.log(possibleCharsArray);
 
 function getRandomFunction () {
-  for (let i = 0; index < lengthCriteria ; i++) {
-    var randomFunction = randomFunctionArray[Math.floor(Math.random() * randomFunctionArray.length)];
+  console.log(possibleCharsArray);
+  for (let i = 0; i < lengthCriteria ; i++) {
+    var randomFunction = possibleCharsArray[Math.floor(Math.random() * possibleCharsArray.length)];
+    console.log(randomFunction);
     storedChar.push(randomFunction);
+    console.log(storedChar);
   }
 }
+console.log(possibleCharsArray);
+
+
+getRandomFunction();
 
 } //for generatePassword function
 
