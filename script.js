@@ -18,49 +18,34 @@ var lowercase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'
 // Array of uppercase characters to be included in password
 var uppercase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
-//Alert to begin!
+// Alert to begin!
 function start () {
-  alert("Press Generate Password to begin!");
+  alert("Click on the Generate Password button to begin!");
 }
 
 start();
 
 function generatePassword () {
-  var lengthCriteria = prompt("How long would you like the password to be?");
+  // Getting various password criteria from user
+  var lengthCriteria = prompt("How long would you like your password to be?");
   lengthCriteria = parseInt(lengthCriteria);
+
   while (lengthCriteria < 8 || lengthCriteria > 128) {
-    alert("Password must be between 8 and 128 characters.");
-    lengthCriteria = prompt("How long would you like the password to be?");
+    alert("You must choose a length between 8 and 128 characters.");
+    lengthCriteria = prompt("How long would you like your password to be?");
     lengthCriteria = parseInt(lengthCriteria);
-    
   }
 
   var lowercaseCriteria = confirm("Would you like to include lowercase characters?");
   var uppercaseCriteria = confirm("Would you like to include uppercase characters?");
   var numericCriteria = confirm("Would you like to include numeric characters?");
   var specialCriteria = confirm("Would you like to include special characters?");
-  
-  // function getRandomLowercase () {
-  //   var randomLowercase = lowercase[Math.floor(Math.random() * lowercase.length)];
-  //   return randomLowercase;
-  // }
-  // function getRandomUppercase () {
-  //   var randomUppercase = uppercase[Math.floor(Math.random() * uppercase.length)];
-  //   return randomUppercase;  
-  // }
-  // function getRandomNumeric () {
-  //   var randomNumeric = numeric[Math.floor(Math.random() * numeric.length)];
-  //   return randomNumeric;  
-  // }
-  // function getRandomSpecial () {
-  //   var randomSpecial = special[Math.floor(Math.random() * special.length)];
-  //   return randomSpecial;  
-  // }
 
-  //Where the chosen, random characters will be stored! IN ARRAY FORM!
+
+  // Where the random characters will be stored from for loop! IN ARRAY FORM!
   var storedChar = [];
 
-
+  // Holding cell for new array of characters, based on the users choices
   var newArray = [];
 
   //if lowercaseCriteria == true, then possibly insert lowercase letter
@@ -80,26 +65,24 @@ function generatePassword () {
   if(specialCriteria === true) {
     newArray = newArray.concat(special);
   }
-  
-  console.log(newArray);
+  if(lowercaseCriteria === false && uppercaseCriteria === false && numericCriteria === false && specialCriteria === false) {
+    alert("You must choose at least one character criteria in order to generate a password. \nPress on the Generate Password button to try again.")
+  }
+
 
 function getRandomChars () {
   for (let i = 0; i < lengthCriteria ; i++) {
     var randomChar = newArray[Math.floor(Math.random() * newArray.length)];
-    storedChar.push(randomChar);
-    console.log(storedChar);
-  }
+    storedChar.push(randomChar);  }
 }
 
 getRandomChars();
 var finalPassword = storedChar.toString();
 finalPassword = finalPassword.replace(/,/g, "");
-console.log(finalPassword);
 
 return finalPassword;
 
-
-} //<-- this curly bracket is for generatePassword function; don't delete!
+} 
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
